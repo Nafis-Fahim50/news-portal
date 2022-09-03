@@ -23,7 +23,7 @@ const newsdetails = async(id)=>{
     const res = await fetch(url);
     const data = await res.json();
     displayNewsDetails(data.data);
-
+    tonggleSpiner(true);
 }
 
 const displayNewsDetails = details =>{
@@ -71,9 +71,18 @@ const displayNewsDetails = details =>{
         newsContainer.appendChild(newsDiv);
        
     })
-   
+    tonggleSpiner(false);
 }
 
+const tonggleSpiner = isLoading =>{
+    const loader = document.getElementById('loader');
+    if (isLoading) {
+        loader.classList.remove('d-none')
+    }
+    else{
+        loader.classList.add('d-none');
+    }
+}
 
 const loadNewsModal = async(newsId)=>{
     const url = `https://openapi.programming-hero.com/api/news/${newsId}`
