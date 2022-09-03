@@ -43,7 +43,7 @@ const displayNewsDetails = details =>{
             <p class="card-text">${detail.details.slice(0,200)}...</p>
             <img src="${detail.author.img}" class="img-fluid h-25 w-25 rounded-circle" alt="...">
             <small class="text-muted pe-5">${detail.author.name}</small>
-            <small class="text-muted">${detail.total_view}</small>
+            <i class="fa-regular fa-eye"><small class="text-muted ps-2">${detail.total_view}</small></i>
             
             </div>
         </div>
