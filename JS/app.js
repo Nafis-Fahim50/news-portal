@@ -40,8 +40,8 @@ const displayNewsDetails = details =>{
         totalResult.classList.add('d-none');
     }
     details.forEach(detail =>{
-        console.log(detail);
-        
+        // console.log(detail);
+        tonggleSpiner(false);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card','mb-4');
         newsDiv.innerHTML = `
@@ -53,7 +53,7 @@ const displayNewsDetails = details =>{
                 <div class="card-body">
                 <h5 class="card-title">${detail.title}</h5>
                 <p class="card-text">${detail.details.slice(0,200)}...</p>
-                <img src="${detail.author.img}" class="img-fluid h-25 w-25 rounded-circle" alt="...">
+                <img src="${detail.author.img}" class="img-fluid author-img  rounded-circle" alt="...">
                 <small class="text-muted pe-5">${detail.author.name}</small>
                 <i class="fa-regular fa-eye"><small class="text-muted ps-1 pe-3">${detail.total_view}</small></i>
                 <i class="fa-regular fa-star-half-stroke"></i>
@@ -69,9 +69,7 @@ const displayNewsDetails = details =>{
         </div>
         `
         newsContainer.appendChild(newsDiv);
-       
     })
-    tonggleSpiner(false);
 }
 
 const tonggleSpiner = isLoading =>{
