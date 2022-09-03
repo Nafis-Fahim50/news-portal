@@ -23,10 +23,10 @@ const newsdetails = async(id)=>{
     const res = await fetch(url);
     const data = await res.json();
     displayNewsDetails(data.data);
-    tonggleSpiner(true);
 }
 
 const displayNewsDetails = details =>{
+    tonggleSpiner(true);
     const newsContainer = document.getElementById('news-details');
     newsContainer.textContent = "";
     const totalResult = document.getElementById('total-news');
@@ -70,6 +70,7 @@ const displayNewsDetails = details =>{
         `
         newsContainer.appendChild(newsDiv);
     })
+    tonggleSpiner(false);
 }
 
 const tonggleSpiner = isLoading =>{
