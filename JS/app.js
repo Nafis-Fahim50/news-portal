@@ -47,7 +47,7 @@ const displayNewsDetails = details =>{
         newsDiv.innerHTML = `
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="${detail.thumbnail_url}" class="img-fluid rounded-start w-75 h-100" alt="...">
+                <img src="${detail.thumbnail_url}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
