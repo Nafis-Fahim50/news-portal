@@ -28,9 +28,19 @@ const newsdetails = async(id)=>{
 
 const displayNewsDetails = details =>{
     const newsContainer = document.getElementById('news-details');
-        newsContainer.textContent = "";
+    newsContainer.textContent = "";
+    const totalResult = document.getElementById('total-news');
+    if(details.length>0){
+        totalResult.classList.remove('d-none')
+        totalResult.innerHTML =`
+        <p> Total News Found: ${details.length} </p>
+        `
+    }
+    else{
+        totalResult.classList.add('d-none');
+    }
     details.forEach(detail =>{
-         console.log(detail);
+        console.log(detail);
         
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card','mb-4');
@@ -57,9 +67,11 @@ const displayNewsDetails = details =>{
                 </div>
             </div>
         </div>
-        `;
+        `
         newsContainer.appendChild(newsDiv);
+       
     })
+   
 }
 
 
@@ -80,4 +92,6 @@ const displayNewsModal = modalDetails =>{
     <p>${modalDetails.details}</p>
     `
 }
+
+
 loadData();
