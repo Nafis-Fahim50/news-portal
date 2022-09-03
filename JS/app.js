@@ -27,24 +27,34 @@ const newsdetails = async(id)=>{
 }
 
 const displayNewsDetails = details =>{
+    const newsContainer = document.getElementById('news-details');
+        newsContainer.textContent = "";
     details.forEach(detail =>{
-        console.log(detail);
-        const newsContainer = document.getElementById('news-details');
-        // newsContainer.innerHTML = "";
+         console.log(detail);
+        
         const newsDiv = document.createElement('div');
-        newsDiv.classList.add('row');
+        newsDiv.classList.add('card','mb-4');
         newsDiv.innerHTML = `
-        <div class="col-md-4">
-            <img src="${detail.thumbnail_url}" class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-            <h5 class="card-title">${detail.title}</h5>
-            <p class="card-text">${detail.details.slice(0,200)}...</p>
-            <img src="${detail.author.img}" class="img-fluid h-25 w-25 rounded-circle" alt="...">
-            <small class="text-muted pe-5">${detail.author.name}</small>
-            <i class="fa-regular fa-eye"><small class="text-muted ps-2">${detail.total_view}</small></i>
-            
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="${detail.thumbnail_url}" class="img-fluid rounded-start w-75 h-100" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title">${detail.title}</h5>
+                <p class="card-text">${detail.details.slice(0,200)}...</p>
+                <img src="${detail.author.img}" class="img-fluid h-25 w-25 rounded-circle" alt="...">
+                <small class="text-muted pe-5">${detail.author.name}</small>
+                <i class="fa-regular fa-eye"><small class="text-muted ps-1 pe-3">${detail.total_view}</small></i>
+                <i class="fa-regular fa-star-half-stroke"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star pe-5"></i>
+                <button onclick = "loadNewsModal('${detail._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetails">
+                Show Details
+                </button>
+                </div>
             </div>
         </div>
         `;
@@ -52,4 +62,22 @@ const displayNewsDetails = details =>{
     })
 }
 
+
+const loadNewsModal = async(newsId)=>{
+    const url = `https://openapi.programming-hero.com/api/news/${newsId}`
+    const res = await fetch(url);
+    const data = await res.json();
+    displayNewsModal(data.data[0]);
+}
+
+const displayNewsModal = modalDetails =>{
+    console.log(modalDetails);
+    const newsTitle = document.getElementById('newsDetailsLabel');
+    newsTitle.innerText = modalDetails.title;
+    const newsBody = document.getElementById('modal-detail');
+    newsBody.innerHTML = `
+    <img src="${modalDetails.image_url}" class="img-fluid rounded-start w-100 h-100" alt="...">
+    <p>${modalDetails.details}</p>
+    `
+}
 loadData();
